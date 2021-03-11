@@ -56,12 +56,13 @@ final_df['datetime'] = ds_masked['time']
 final_df.set_index('datetime', inplace=True)
 
 # Resample to daily
+final_df_daily = final_df.resample('D').mean()
 
+# Compute an extra value: snow depth change
+final_df_daily['sd_diff'] = final_df_daily['sd'].diff()
 
-
-# Export list of points to check in QGIS
-df.to_csv('/home/johnny/Documents/Teaching/490_Geospatial_Data_Science_Applications/Applications/River_Discharge/data/tests/era_grid.csv')
-merged.to_csv('/home/johnny/Documents/Teaching/490_Geospatial_Data_Science_Applications/Applications/River_Discharge/data/tests/basin_grid.csv')
+# Save to csv
+final_df_daily.to_csv(filepath + 'era/era5_training_data.csv')
 
 
 

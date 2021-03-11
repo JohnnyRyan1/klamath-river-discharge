@@ -3,4 +3,5 @@ Application: River discharge using machine learning
 Klamath River Basin can be downloaded from:
 https://www.hydrosheds.org/downloads
 
-
+ERA5 data can be downloaded from:
+https://cds.climate.copernicus.eu/cdsapp#!/home
