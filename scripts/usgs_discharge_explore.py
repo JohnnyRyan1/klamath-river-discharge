@@ -18,7 +18,7 @@ filepath = '/home/johnny/Documents/Teaching/490_Geospatial_Data_Science_Applicat
 filename = filepath + 'Klamath_Discharge_2018_2020.txt'
 
 # Read data, 'df' stands for DataFrame
-df = pd.read_csv(filename, skiprows=28, sep='\t', parse_dates=[2])
+df = pd.read_csv(filename, skiprows=29, sep='\t', parse_dates=[2])
 
 # Set columns names
 df.columns = ['agency', 'site_no', 'datetime', 'time_zone', 'discharge', 'status']
@@ -42,8 +42,10 @@ plt.plot(df_daily)
 plt.plot(df_monthly)
 
 # Save as csv
-df_daily.to_csv(filepath + 'Klamath_Discharge_Daily_2018_2020.csv')
+#df_daily.to_csv(filepath + 'Klamath_Discharge_Daily_2018_2020.csv')
+df_daily['2018-01-01':'2018-12-31'].to_csv(filepath + 'Klamath_Discharge_Daily_2018.csv')
 df_daily['2019-01-01':'2019-12-31'].to_csv(filepath + 'Klamath_Discharge_Daily_2019.csv')
+df_daily['2020-01-01':'2020-12-31'].to_csv(filepath + 'Klamath_Discharge_Daily_2020.csv')
 
 
 
