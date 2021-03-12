@@ -28,7 +28,8 @@ rf_model = pickle.load(open(filepath + '/models/klamath_rf.sav', 'rb'))
 nn_model = pickle.load(open(filepath + '/models/klamath_nn.sav', 'rb'))
 
 # Import discharge data
-label_data = pd.read_csv(filepath + 'data/discharge/Klamath_Discharge_Daily_2020.csv')
+discharge_2019 = pd.read_csv(filepath + 'data/discharge/Klamath_Discharge_Daily_2019.csv')
+discharge_2020 = pd.read_csv(filepath + 'data/discharge/Klamath_Discharge_Daily_2020.csv')
 
 ###############################################################################
 # Import climate data
@@ -67,13 +68,13 @@ predictions_rf = rf_model.predict(X_scaled)
 ###############################################################################
 
 # Calculate the absolute errors
-errors = abs(predictions_rf - label_data['discharge'][7:])
+errors = abs(predictions_rf - discharge_2020['discharge'][7:])
 
 # Print out the mean absolute error (mae)
 print('Mean Absolute Error:', round(np.mean(errors), 3))
 
 # Calculate mean absolute percentage error (MAPE)
-mape = 100 * (errors / label_data['discharge'][7:])
+mape = 100 * (errors / discharge_2020['discharge'][7:])
 
 # Calculate and display accuracy
 accuracy = 100 - np.mean(mape)
@@ -81,11 +82,11 @@ print('Accuracy:', round(accuracy, 2), '%.')
 
 plt.plot(predictions_rf)
 plt.plot(predictions_nn)
-plt.plot(label_data['discharge'])
+plt.plot(discharge_2020['discharge'])
 
 # Calculate Nash-Sutcliffe Efficiency 
-nse = 1 - (np.sum((label_data['discharge'] - label_data['predictions'])**2) / 
-           np.sum((label_data['discharge'] - np.mean(label_data['discharge']))**2))
+nse = 1 - (np.sum((discharge_2020['discharge'] - predictions_rf)**2) / 
+           np.sum((discharge_2020['discharge'] - np.mean(discharge_2020['discharge']))**2))
 
 
 
