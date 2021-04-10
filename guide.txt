@@ -1,4 +1,4 @@
-Application: River discharge using machine learning
+Application: Predicting river discharge using machine learning
 
 Klamath River Basin can be downloaded from:
 https://www.hydrosheds.org/downloads
